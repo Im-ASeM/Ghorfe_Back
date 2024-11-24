@@ -12,7 +12,7 @@ public class LogoController : Controller
     }
 
     [HttpPost]
-    [AllowAnonymous]
+    [Authorize]
     public IActionResult AddLogo([FromBody] NewLogo NLogo)
     {
         var Logo = new Logo();
