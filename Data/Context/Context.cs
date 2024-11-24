@@ -5,7 +5,6 @@ public class Context : DbContext
     public DbSet<Logo> Logo_tbl { get; set; }
     public DbSet<PhoneNumber> Phones_tbl { get; set; }
     public DbSet<Posts> Posts_tbl { get; set; }
-    public DbSet<Logo> Logos_tbl { get; set; }
     public DbSet<Category> Categories_tbl { get; set; }
     public DbSet<Menu> Menus_tbl { get; set; }
     public DbSet<Users> Users_tbl { get; set; }

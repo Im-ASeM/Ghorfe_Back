@@ -12,13 +12,13 @@ public class LogoController : Controller
     }
 
     [HttpPost]
-    [Authorize]
+    [AllowAnonymous]
     public IActionResult AddLogo([FromBody] NewLogo NLogo)
     {
         var Logo = new Logo();
         Logo.ImageLogo = NLogo.ImageLogo;
 
-        Logo.active = NLogo.active;
+        Logo.active = false;
 
         db.Logo_tbl.Add(Logo);
         db.SaveChanges();
@@ -53,5 +53,32 @@ public class LogoController : Controller
         db.Logo_tbl.Remove(Logo);
         db.SaveChanges();
         return Ok("با موفقیت پاک گردید");
+    }
+
+    [HttpGet]
+    [Authorize]
+    public IActionResult ActiveLogo(int Id)
+    {
+        bool success = false;
+
+        foreach (var logo in db.Logo_tbl.ToList())
+        {
+            if (logo.Id == Id)
+            {
+                logo.active = true;
+                success = true;
+            }
+            else
+                logo.active = false;
+        }
+        if (success)
+        {
+            db.SaveChanges();
+            return Ok();
+        }
+        else
+        {
+            return NotFound();
+        }
     }
 }
